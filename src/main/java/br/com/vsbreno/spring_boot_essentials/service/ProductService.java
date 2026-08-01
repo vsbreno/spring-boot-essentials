@@ -73,4 +73,8 @@ public class ProductService {
 
         return product;
     }
+
+    public void removeProduct(Integer id){
+        PRODUCTS.removeIf(productId -> productId.getId().equals(id));
+    }
 }
