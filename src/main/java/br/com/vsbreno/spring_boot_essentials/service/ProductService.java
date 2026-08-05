@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.vsbreno.spring_boot_essentials.dto.ProductDTO;
+import br.com.vsbreno.spring_boot_essentials.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.com.vsbreno.spring_boot_essentials.database.model.ProductEntity;
@@ -60,12 +61,12 @@ public class ProductService {
         return newProduct;
     }
 
-    public ProductEntity updateProduct(ProductDTO productDTO, Integer id) {
+    public ProductEntity updateProduct(ProductDTO productDTO, Integer id) throws NotFoundException {
 
         ProductEntity product = PRODUCTS.stream()
                 .filter(p -> p.getId().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Product not found."));
+                .orElseThrow(() -> new NotFoundException("Product not found."));
 
         product.setName(productDTO.getName());
         product.setPreco(productDTO.getPreco());

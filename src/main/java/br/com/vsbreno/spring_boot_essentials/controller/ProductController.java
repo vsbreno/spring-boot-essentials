@@ -3,6 +3,7 @@ package br.com.vsbreno.spring_boot_essentials.controller;
 
 import br.com.vsbreno.spring_boot_essentials.database.model.ProductEntity;
 import br.com.vsbreno.spring_boot_essentials.dto.ProductDTO;
+import br.com.vsbreno.spring_boot_essentials.exception.NotFoundException;
 import br.com.vsbreno.spring_boot_essentials.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,7 @@ public class ProductController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ProductEntity updateProduct(@PathVariable Integer id, @RequestBody ProductDTO productDTO) {
+    public ProductEntity updateProduct(@PathVariable Integer id, @RequestBody ProductDTO productDTO) throws NotFoundException {
         return productService.updateProduct(productDTO, id);
     }
     @DeleteMapping("/{id}")
